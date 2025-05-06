@@ -1,0 +1,13 @@
+[project]
+name = "ticket-desktop-reqable"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.13"
+dependencies = [
+    "reqable-scripting",
+    #    "reqable-scripting>=1.0.0",
+    "requests>=2.32.3",
+]
+
+[tool.uv.sources]
+reqable-scripting = { git = "https://github.com/reqable/python-scripting-api.git", rev = "main" }
