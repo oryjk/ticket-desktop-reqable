@@ -73,8 +73,8 @@ def handle_login_index_response(context, response):
     json_data = json.dumps(data)
 
     try:
-        url = f"{host}/ticket-member/order/createUserInfo?licence_key={licence_key}"
-        requests.post(url, data=json_data, headers=headers, verify=False)
+        url = f"{host}/ticket-member/order/createUserInfo"
+        requests.post(url, params={"licence_key": licence_key},data=json_data, headers=headers, verify=False)
         print("handle_login_index_response 执行成功！")
     except requests.RequestException as e:
         print(f"handle_login_index_response 请求发生错误：{e}")
@@ -88,10 +88,10 @@ def handle_get_crews_list_response(context, response, host, licence_key):
         response.body.jsonify()
         data = response.body["data"]
         json_data = json.dumps(data)
-        url = f"{host}/ticket-member/order/bindUserMember?licence_key={licence_key}"
+        url = f"{host}/ticket-member/order/bindUserMember"
         try:
             # 发送 POST 请求，将 JSON 数据作为请求体发送
-            requests.post(url, data=json_data, headers=headers, verify=False)
+            requests.post(url,  params={"licence_key": licence_key},data=json_data, headers=headers, verify=False)
             print("handle_get_crews_list_response 执行成功！")
         except requests.RequestException as e:
             print(f"handle_get_crews_list_response 请求发生错误：{e}")
@@ -142,8 +142,8 @@ def handle_match_list_response(context: Context, response: HttpResponse, host, l
             print("已将 data.status 字段修改为 1")
         else:
             print("match_list为空，目前还没有比赛，赋予默认值")
-            url = f"{host}/ticket-member/match/default/matchList?licence_key={licence_key}"
-            current_match_list = requests.get(url)
+            url = f"{host}/ticket-member/match/default/matchList"
+            current_match_list = requests.get(url, params={"licence_key": licence_key})
             # print(f"current_match_info: {current_match_list.json()}")
             response.body = current_match_list.json()
 
@@ -154,9 +154,9 @@ def handle_match_list_response(context: Context, response: HttpResponse, host, l
 
 
 def get_current_match(host: str, licence_key: str):
-    url = f"{host}/ticket-member/match/current/{licence_key}?licence_key={licence_key}"
+    url = f"{host}/ticket-member/match/current/{licence_key}"
     print(f"获取当前比赛信息: {url}")
-    current_match_info = requests.get(url)
+    current_match_info = requests.get(url, params={"licence_key": licence_key})
     return current_match_info
 
 
@@ -196,8 +196,8 @@ def get_config_info(context: Context) -> Tuple[str, str]:
 def handle_get_match_info_response(context: Context, response: HttpResponse, host, licence_key, lid2):
     context
     if response.code != 200:
-        url = f"{host}/ticket-member/match/default/matchInfo?lid2={lid2}&licence_key={licence_key}"
-        current_match_info = requests.get(url)
+        url = f"{host}/ticket-member/match/default/matchInfo?lid2={lid2}"
+        current_match_info = requests.get(url,params={"licence_key": licence_key})
         response.body = current_match_info.json()
         return response
     response.body.jsonify()

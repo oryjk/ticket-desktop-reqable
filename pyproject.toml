@@ -4,9 +4,12 @@ version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.13"
 dependencies = [
+    "mypy>=1.15.0",
     "reqable-scripting",
     #    "reqable-scripting>=1.0.0",
     "requests>=2.32.3",
+    "ruff>=0.11.8",
+    "types-requests>=2.32.0.20250328",
 ]
 
 [tool.uv.sources]
