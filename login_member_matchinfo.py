@@ -1,5 +1,6 @@
 # API Docs: https://reqable.com/docs/capture/addons
 import json
+import socket
 from typing import Tuple
 
 import requests
@@ -43,6 +44,15 @@ def onRequest(context: Context, request: HttpRequest):
         }
         context.shared = env_info
         return request
+    elif "getBillRegion" in request_url:
+        host, licence_key = get_config_info(context)
+        print(f"host {host}, licence_key {licence_key}")
+        env_info = {
+            "host": host,
+            "licence_key": licence_key,
+        }
+        context.shared = env_info
+        return request
 
     return request
 
@@ -55,6 +65,7 @@ def handle_login_index_response(context, response):
     print("token:" + token)
 
     uid = response.body["info"]["id"]
+    realname = response.body["info"]["realname"]
     print("uid:" + str(uid))
 
     code = context.shared["code"]
@@ -62,12 +73,14 @@ def handle_login_index_response(context, response):
     host = context.shared["host"]
 
     licence_key = context.shared['licence_key']
+    machine_id = socket.gethostname()
     data = {
         "token": token,
         "userId": uid,
         "loginCode": code,
-        "machineId": "",
-        "licenseKey": licence_key
+        "machineId": machine_id,
+        "licenseKey": licence_key,
+        "realname":realname
     }
 
     json_data = json.dumps(data)
@@ -124,12 +137,16 @@ def onResponse(context: Context, response: HttpResponse):
         licence_key = context.shared["licence_key"]
         print(f"onResponse {request_url} host {host}, licence_key {licence_key}")
         return handle_match_list_response(context, response, host, licence_key)
+    elif "getBillRegion" in request_url:
+        host = context.shared["host"]
+        licence_key = context.shared["licence_key"]
+        print(f"onResponse {request_url} host {host}, licence_key {licence_key}")
+        return handle_match_region_response(context, response, host, licence_key)
 
     return response
 
 
 def handle_match_list_response(context: Context, response: HttpResponse, host, licence_key):
-    response.body.jsonify()
     current_match_info = get_current_match(host, licence_key)
     if current_match_info.status_code == 200:
         match_data = current_match_info.json()
@@ -137,15 +154,33 @@ def handle_match_list_response(context: Context, response: HttpResponse, host, l
 
         if 'data' in response.body and 'match_list' in response.body['data'] and response.body['data']['match_list']:
             # 将 status 字段设置为 1
-            print(response.body['data']['match_list'][0][0])
             response.body['data']['match_list'][0][0]['id'] = match_id
             print("已将 data.status 字段修改为 1")
         else:
             print("match_list为空，目前还没有比赛，赋予默认值")
             url = f"{host}/ticket-member/match/default/matchList"
-            current_match_list = requests.get(url, params={"licence_key": licence_key})
+            current_match_list = requests.get(url, params={"licence_key": licence_key},verify=False)
             # print(f"current_match_info: {current_match_list.json()}")
             response.body = current_match_list.json()
+
+        return response
+    else:
+        print(f"获取比赛ID失败，状态码: {current_match_info.status_code}")
+        return response
+def handle_match_region_response(context: Context, response: HttpResponse, host, licence_key):
+    response.body.jsonify()
+    current_match_info = get_current_match(host, licence_key)
+    if current_match_info.status_code == 200:
+
+        if 'btn_status' in response.body and response.body['btn_status']==1:
+            print("可以获取到比赛座位信息，直接返回")
+            return response
+        else:
+            print("region 为空，目前还没有比赛，赋予默认值")
+            url = f"{host}/ticket-member/match/default/region"
+            region_json = requests.get(url, params={"licence_key": licence_key},verify=False)
+            # print(f"current_match_info: {current_match_list.json()}")
+            response.body = region_json.json()
 
         return response
     else:
@@ -156,7 +191,7 @@ def handle_match_list_response(context: Context, response: HttpResponse, host, l
 def get_current_match(host: str, licence_key: str):
     url = f"{host}/ticket-member/match/current/{licence_key}"
     print(f"获取当前比赛信息: {url}")
-    current_match_info = requests.get(url, params={"licence_key": licence_key})
+    current_match_info = requests.get(url, params={"licence_key": licence_key},verify=False)
     return current_match_info
 
 
@@ -197,9 +232,10 @@ def handle_get_match_info_response(context: Context, response: HttpResponse, hos
     context
     if response.code != 200:
         url = f"{host}/ticket-member/match/default/matchInfo?lid2={lid2}"
-        current_match_info = requests.get(url,params={"licence_key": licence_key})
+        current_match_info = requests.get(url,params={"licence_key": licence_key},verify=False)
         response.body = current_match_info.json()
         return response
+
     response.body.jsonify()
     if 'data' in response.body and 'sale' in response.body['data']:
         # 将 status 字段设置为 1
