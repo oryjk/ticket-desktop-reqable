@@ -4,6 +4,8 @@ version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.13"
 dependencies = [
+    "frida>=16.7.18",
+    "frida-tools>=13.7.1",
     "mypy>=1.15.0",
     "reqable-scripting",
     #    "reqable-scripting>=1.0.0",

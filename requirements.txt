@@ -1,0 +1,12 @@
+certifi==2025.4.26
+charset-normalizer==3.4.2
+idna==3.10
+mypy==1.15.0
+mypy_extensions==1.1.0
+reqable-scripting @ git+https://github.com/reqable/python-scripting-api.git@6c8b045a16877d90188b8306df4f671ab654c1c4
+requests==2.32.3
+ruff==0.11.8
+setuptools==80.3.1
+types-requests==2.32.0.20250328
+typing_extensions==4.13.2
+urllib3==2.4.0
