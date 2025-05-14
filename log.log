@@ -1,0 +1,142 @@
+15:00:33.165 Resolved host = http://127.0.0.1:8000
+15:00:33.165 Resolved license_file path = /Users/carlwang/temp/license.txt
+15:00:33.165 host http://127.0.0.1:8000, licence_key fP1wWS9c
+15:00:33.994 onResponse https://fccdn1.k4n.cc/fc/wx_api/v1/Login/index host http://127.0.0.1:8000, licence_key fP1wWS9c
+15:00:33.994 handle_login_index_response 开始执行
+15:00:33.994 token:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjExNjY5Miwib2lkIjoiMWYxMGI5OWJkODNiZTAxN2Q3NDE5MGM0MGYyNmJhMDgiLCJsaWQiOjAsInNpZGUiOiJ3eF9hcGkiLCJhdWQiOiIiLCJleHAiOjE3NDcyNzgwMzMsImlhdCI6MTc0NzIwNjAzMywiaXNzIjoiIiwianRpIjoiOTYwODUxMjA3Y2EzZmFhZWYzMjFkMGUwNjg0NzZiYjUiLCJuYmYiOjE3NDcyMDYwMzMsInN1YiI6IiJ9.mL_bImSqIe_fe2dnrOG_BvQ-llWMwne4uh4MJqpV9lo
+15:00:33.994 uid:116692
+15:00:33.994 code:0d1D3aGa1lmAAJ0LbYIa174dHR3D3aG6
+15:00:33.994 handle_login_index_response 执行成功！
+15:00:36.291 Resolved host = http://127.0.0.1:8000
+15:00:36.291 Resolved license_file path = /Users/carlwang/temp/license.txt
+15:00:36.291 host http://127.0.0.1:8000, licence_key fP1wWS9c
+15:00:36.655 onResponse https://fccdn1.k4n.cc/fc/wx_api/v1/Open/matchList?lid2=116692 host http://127.0.0.1:8000, licence_key fP1wWS9c
+15:00:36.655 获取当前比赛信息: http://127.0.0.1:8000/ticket-member/match/current/fP1wWS9c
+15:00:36.655 match_list为空，目前还没有比赛，赋予默认值
+15:00:39.354 Resolved host = http://127.0.0.1:8000
+15:00:39.354 Resolved license_file path = /Users/carlwang/temp/license.txt
+15:00:39.354 host http://127.0.0.1:8000, licence_key fP1wWS9c
+15:00:39.354 获取当前比赛信息: http://127.0.0.1:8000/ticket-member/match/current/fP1wWS9c
+15:00:39.354 match_id = 45
+15:00:39.354 设置了比赛的id: 45
+15:00:39.505 onResponse https://fccdn1.k4n.cc/fc/wx_api/v1/MiniApp/getMatchInfo?lid2=116692 host http://127.0.0.1:8000, licence_key fP1wWS9c
+15:00:39.627 Resolved host = http://127.0.0.1:8000
+15:00:39.627 Resolved license_file path = /Users/carlwang/temp/license.txt
+15:00:39.627 host http://127.0.0.1:8000, licence_key fP1wWS9c
+15:00:39.734 onResponse https://fccdn1.k4n.cc/fc/wx_api/v1/MatchCon/getBillRegion?lid2=116692 host http://127.0.0.1:8000, licence_key fP1wWS9c
+15:00:39.741 Traceback (most recent call last):
+  File "main.py", line 55, in <module>
+    main()
+    ~~~~^^
+  File "main.py", line 20, in main
+    onResponse(argv[1])
+    ~~~~~~~~~~^^^^^^^^^
+  File "main.py", line 43, in onResponse
+    result = addons.onResponse(context, CaptureHttpResponse(data['response']))
+  File "addons.py", line 235, in onResponse
+    return handle_match_region_response(context, response, host, licence_key)
+  File "addons.py", line 274, in handle_match_region_response
+    response.body.jsonify()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "reqable.py", line 567, in jsonify
+    self._payload = json.loads(self._payload)
+                    ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/carlwang/.local/share/uv/python/cpython-3.13.2-macos-aarch64-none/lib/python3.13/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/Users/carlwang/.local/share/uv/python/cpython-3.13.2-macos-aarch64-none/lib/python3.13/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlwang/.local/share/uv/python/cpython-3.13.2-macos-aarch64-none/lib/python3.13/json/decoder.py", line 363, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+15:00:39.819 Resolved host = http://127.0.0.1:8000
+15:00:39.819 Resolved license_file path = /Users/carlwang/temp/license.txt
+15:00:39.819 host http://127.0.0.1:8000, licence_key fP1wWS9c
+15:00:39.953 onResponse https://fccdn1.k4n.cc/fc/wx_api/v1/MatchCon/getBillRegion?lid2=116692 host http://127.0.0.1:8000, licence_key fP1wWS9c
+15:00:39.953 Traceback (most recent call last):
+15:00:39.954   File "main.py", line 55, in <module>
+    main()
+    ~~~~^^
+  File "main.py", line 20, in main
+    onResponse(argv[1])
+    ~~~~~~~~~~^^^^^^^^^
+  File "main.py", line 43, in onResponse
+    result = addons.onResponse(context, CaptureHttpResponse(data['response']))
+  File "addons.py", line 235, in onResponse
+    return handle_match_region_response(context, response, host, licence_key)
+  File "addons.py", line 274, in handle_match_region_response
+    response.body.jsonify()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "reqable.py", line 567, in jsonify
+    self._payload = json.loads(self._payload)
+                    ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/carlwang/.local/share/uv/python/cpython-3.13.2-macos-aarch64-none/lib/python3.13/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/Users/carlwang/.local/share/uv/python/cpython-3.13.2-macos-aarch64-none/lib/python3.13/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlwang/.local/share/uv/python/cpython-3.13.2-macos-aarch64-none/lib/python3.13/json/decoder.py", line 363, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+15:00:40.033 Resolved host = http://127.0.0.1:8000
+15:00:40.033 Resolved license_file path = /Users/carlwang/temp/license.txt
+15:00:40.033 host http://127.0.0.1:8000, licence_key fP1wWS9c
+15:00:40.160 onResponse https://fccdn1.k4n.cc/fc/wx_api/v1/MatchCon/getBillRegion?lid2=116692 host http://127.0.0.1:8000, licence_key fP1wWS9c
+15:00:40.160 Traceback (most recent call last):
+15:00:40.161   File "main.py", line 55, in <module>
+    main()
+    ~~~~^^
+  File "main.py", line 20, in main
+    onResponse(argv[1])
+    ~~~~~~~~~~^^^^^^^^^
+  File "main.py", line 43, in onResponse
+    result = addons.onResponse(context, CaptureHttpResponse(data['response']))
+  File "addons.py", line 235, in onResponse
+    return handle_match_region_response(context, response, host, licence_key)
+  File "addons.py", line 274, in handle_match_region_response
+    response.body.jsonify()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "reqable.py", line 567, in jsonify
+    self._payload = json.loads(self._payload)
+                    ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/carlwang/.local/share/uv/python/cpython-3.13.2-macos-aarch64-none/lib/python3.13/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/Users/carlwang/.local/share/uv/python/cpython-3.13.2-macos-aarch64-none/lib/python3.13/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlwang/.local/share/uv/python/cpython-3.13.2-macos-aarch64-none/lib/python3.13/json/decoder.py", line 363, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+15:00:40.343 Resolved host = http://127.0.0.1:8000
+15:00:40.343 Resolved license_file path = /Users/carlwang/temp/license.txt
+15:00:40.343 host http://127.0.0.1:8000, licence_key fP1wWS9c
+15:00:40.463 onResponse https://fccdn1.k4n.cc/fc/wx_api/v1/MatchCon/getBillRegion?lid2=116692 host http://127.0.0.1:8000, licence_key fP1wWS9c
+15:00:40.463 Traceback (most recent call last):
+15:00:40.464   File "main.py", line 55, in <module>
+    main()
+    ~~~~^^
+  File "main.py", line 20, in main
+    onResponse(argv[1])
+    ~~~~~~~~~~^^^^^^^^^
+  File "main.py", line 43, in onResponse
+    result = addons.onResponse(context, CaptureHttpResponse(data['response']))
+  File "addons.py", line 235, in onResponse
+    return handle_match_region_response(context, response, host, licence_key)
+  File "addons.py", line 274, in handle_match_region_response
+    response.body.jsonify()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "reqable.py", line 567, in jsonify
+    self._payload = json.loads(self._payload)
+                    ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/carlwang/.local/share/uv/python/cpython-3.13.2-macos-aarch64-none/lib/python3.13/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/Users/carlwang/.local/share/uv/python/cpython-3.13.2-macos-aarch64-none/lib/python3.13/json/decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlwang/.local/share/uv/python/cpython-3.13.2-macos-aarch64-none/lib/python3.13/json/decoder.py", line 363, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
